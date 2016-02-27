@@ -6,10 +6,10 @@
 # 'jekyll serve'. If you change this file, please restart the server process.
 
 # Site settings
-title: code-pharm
+title: CodeRx
 email: jrlegrand@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  Codepharm is an outlet for sharing things I learn along the way
+  CodeRx is an outlet for sharing things I learn along the way
   as I try to become a better web developer and pharmacist informaticist.
   <br>
   - Joey LeGrand

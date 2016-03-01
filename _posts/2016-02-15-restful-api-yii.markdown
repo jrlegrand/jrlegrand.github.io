@@ -20,7 +20,6 @@ I recommend using the Composer method to install the basic application template.
 
 *Part one:* Create a new file in any basic text editor (i.e. Notepad) and fill it with the following code.
 
-
 	RewriteEngine on
 	# If a directory or a file exists, use it directly
 	RewriteCond %{REQUEST_FILENAME} !-f
@@ -40,25 +39,28 @@ Prettier URLS look like `/post/100`
 
 By default, Yii shows ugly URLs.  We need to make them prettier by opening up `/config/web.php` and changing `enablePrettyUrl` to true.
 
-{% highlight php %}
-[
- 'components' =>
-	 [ 'urlManager' => [
-		 'enablePrettyUrl' => true,
-		 'showScriptName' => false,
-		 'enableStrictParsing' => false,
-		 'rules' => [
-			 // ...
+	[
+	 'components' =>
+		 [ 'urlManager' => [
+			 'enablePrettyUrl' => true,
+			 'showScriptName' => false,
+			 'enableStrictParsing' => false,
+			 'rules' => [
+				 // ...
+			 ],
 		 ],
 	 ],
- ],
-]
-{% endhighlight %}
-	 
-Create a relational database structure
-Setup database config file
-Use Gii to make the RESTFUL controllers
-Edit the Models to define relations
-Edit the Models to show expanded fields
-Show how to write the URL to include expanded fields
-Customize the controller to change default actions (i.e. pagination / sorting)
+	]
+
+## Create a relational database structure
+## Setup database config file
+## Use Gii to make the RESTFUL controllers
+## Edit the Controller
+* Make it restful
+* Customize the controller to change default actions
+** (i.e. pagination / sorting)
+* ## Edit the Model
+* Define relations
+* Show expanded fields
+Example / demo
+* Show how to write the URL to include expanded fields

@@ -53,14 +53,21 @@ By default, Yii shows ugly URLs.  We need to make them prettier by opening up `/
 	]
 
 ## Create a relational database structure
+
 ## Setup database config file
+
 ## Use Gii to make the RESTFUL controllers
+
 ## Edit the Controller
+
 * Make it restful
 * Customize the controller to change default actions
 ** (i.e. pagination / sorting)
-* ## Edit the Model
+
+## Edit the Model
+
 * Define relations
 * Show expanded fields
-Example / demo
+
+## Example / demo
 * Show how to write the URL to include expanded fields

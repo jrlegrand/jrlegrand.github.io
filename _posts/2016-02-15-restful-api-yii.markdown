@@ -101,13 +101,35 @@ Type the following into Notepad and save it as `/controllers/LoincController.php
 	    public $modelClass = 'app\models\Loinc';
 	}
 
-Do the same thing for your LOINC panel model (repeat the above, but replace Loinc with LoincPanel).	
+Do the same thing for your LOINC panel model (repeat the above, but replace `Loinc` with `LoincPanel`).	
 
-* Make it restful
+This tiny file (along with the RESTFUL URL rule we applied earlier) gives you basically all the functionality of a RESTFUL API with minimal code.
+
 * Customize the controller to change default actions
 ** (i.e. pagination / sorting)
 
 ## Edit the Model
+
+By default, Yii uses the `id` field as the primary key, but in this case, we need to use `loinc_num`.  Add the following code to your Loinc model within the class function.
+
+	public static function primaryKey()
+	{
+	return ['loinc_num'];
+	}
+
+Also, we need to define the relations between LOINC codes and LOINC panels.  We define a `hasMany` panel relationship with the `LoincPanel` model, and we link the two models based on a panel's `parent_loinc` being equal to its parent's `loinc_num`.
+
+	public function extraFields()
+	{
+		return ['panel'];
+	}
+	
+	public function getPanel()
+	{
+		return $this->hasMany(LoincPanel::className(), ['parent_loinc' => 'loinc_num']);
+	}
+
+
 
 * Define relations
 * Show expanded fields

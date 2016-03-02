@@ -40,25 +40,68 @@ Prettier URLS look like `/post/100`
 By default, Yii shows ugly URLs.  We need to make them prettier by opening up `/config/web.php` and changing `enablePrettyUrl` to true.
 
 	[
-	 'components' =>
-		 [ 'urlManager' => [
+	 'components' => [ 
+	 	'urlManager' => [
 			 'enablePrettyUrl' => true,
 			 'showScriptName' => false,
 			 'enableStrictParsing' => false,
 			 'rules' => [
-				 // ...
+				'class' => 'yii\rest\UrlRule',
+				'controller' => [
+					'loinc',
+					'loinc-panel',
+				],
 			 ],
 		 ],
 	 ],
 	]
 
+Not only did we make the URLs pretty, but we also added a rule that for the `loinc` and `loinc-panel` controllers, we should use a RESTFUL URL class.  I will go into how this is useful as we go on.
+
 ## Create a relational database structure
+
+If you don't already have a database set up, follow the directions to install XAMPP and plug the following code into your SQL editor.
+
+	DROP  TABLE IF EXISTS loinc;
+	CREATE TABLE loinc (
+	  loinc_num varchar(10) not null,
+	  loinc_name varchar(255) default null,
+	  common_rank integer default null,
+	  panel_type varchar(50) default null,
+	
+	  primary key (loinc_num)
+	
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+	DROP  TABLE IF EXISTS loinc_panels;
+	CREATE TABLE loinc_panels (
+	  parent_loinc_num varchar(10) not null,
+	  loinc_num varchar(10) not null,
+	  loinc_name varchar(255) default null,
+	  common_rank integer default null,
+
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+We are going to make two databases - one for LOINC codes, and another for LOINC panels.  Since LOINC codes can be related to several LOINC panels, and LOINC panels can have only one parent LOINC code, we will need to define those relations later on.
 
 ## Setup database config file
 
-## Use Gii to make the RESTFUL controllers
+## Use Gii to make the models
 
-## Edit the Controller
+## Create the RESTFUL Controller
+
+Type the following into Notepad and save it as `/controllers/LoincController.php`.
+
+	namespace app\controllers;
+	
+	use yii\rest\ActiveController;
+	
+	class LoincController extends ActiveController
+	{
+	    public $modelClass = 'app\models\Loinc';
+	}
+
+Do the same thing for your LOINC panel model (repeat the above, but replace Loinc with LoincPanel).	
 
 * Make it restful
 * Customize the controller to change default actions

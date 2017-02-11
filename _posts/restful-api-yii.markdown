@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Making a RESTful API with Yii 2.0"
-date:   2016-02-24 10:23:43 -0600
+date:   2017-02-11 10:23:43 -0600
 categories: yii
 ---
 Intro:

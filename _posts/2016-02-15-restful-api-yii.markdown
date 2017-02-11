@@ -14,7 +14,7 @@ Steps:
 
 Go to [http://www.yiiframework.com/download/][yii download].
 
-I recommend using the Composer method to install the basic application template.  Install Yii into an "api" subfolder of your app to keep it separate from the rest of your code.
+I recommend using the Composer method to install the basic application template.  Install Yii into an "/api/v1" subfolder of your app to keep it separate from the rest of your code.
 
 ## Customize .htaccess and web config to show pretty URLs
 
@@ -77,8 +77,8 @@ If you don't already have a database set up, follow the directions to install XA
 	
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-	DROP  TABLE IF EXISTS loinc_panels;
-	CREATE TABLE loinc_panels (
+	DROP  TABLE IF EXISTS loinc_panel;
+	CREATE TABLE loinc_panel (
 	  parent_loinc_num varchar(10) not null,
 	  loinc_num varchar(10) not null,
 	  loinc_name varchar(255) default null,
@@ -103,7 +103,7 @@ You will need to configure your database configuration file to point to the data
 	];
 
 
-## Use Gii to make the models
+## Use Gii to create the models
 
 Yii comes with an incredible code generation tool called Gii which can create entire models out of code with a few clicks.  For our purposes, we will need to create models for `Loinc` and `LoincPanel`.
 
@@ -115,7 +115,11 @@ The tricky part here is locating Gii with the proper URL syntax since we modifie
 		'allowedIPs' => ['YOUR_IP_ADDRESS']
     ];
 
-Once you have launched the Gii module, 
+Once you have launched the Gii module, click the Model Generator link on the first page.  Type "loinc" into the table name field, and hit tab.  Press the Preview button, and then once it appears, press the Generate button.  Voila!  Now you have generated a file called `/models/Loinc.php`.  Repeat for your table "loinc_panel" so that you now have two Models.
+
+![Gii Model screen](http://coderx.io/img/gii.png)
+
+If you get lost, follow Yii's excellent [guide to working with Gii][yii gii guide].
 
 ## Create the RESTful Controller
 
@@ -133,9 +137,6 @@ Type the following into Notepad and save it as `/controllers/LoincController.php
 Do the same thing for your LOINC panel model (repeat the above, but replace `Loinc` with `LoincPanel`).	So you should now have added two files to the controllers directory: `LoincController.php` and `LoincPanelController.php`.
 
 This tiny file (along with the RESTful URL rule we applied earlier) gives you basically all the functionality of a RESTful API with minimal code.
-
-* Customize the controller to change default actions
-** (i.e. pagination / sorting)
 
 ## Edit the Model
 
@@ -241,3 +242,4 @@ http://www.monitorx.org/api/v1/loinc/22327-1 (specific LOINC ID)
 	<panel_type/>
 
 [yii download]: http://www.yiiframework.com/download/
+[yii gii guide]: http://www.yiiframework.com/doc-2.0/guide-start-gii.html#starting-gii

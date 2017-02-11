@@ -131,9 +131,9 @@ Also, we need to define the relations between LOINC codes and LOINC panels.  We 
 
 In addition, by adding the `extraFields()` function, we allowed the URL request to return details about the individual `Loinc` items contained within each `LoincPanel`.  To use this functionality when making a request, you would add `expand=panel` to the URL.
 
-## Example / demo
+## Example
 
-www.example.com/api/vi/loinc
+www.example.com/api/v1/loinc
 
 	. . .
 	

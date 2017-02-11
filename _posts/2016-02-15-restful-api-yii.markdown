@@ -129,8 +129,77 @@ Also, we need to define the relations between LOINC codes and LOINC panels.  We 
 		return $this->hasMany(LoincPanel::className(), ['parent_loinc' => 'loinc_num']);
 	}
 
-In addition, by adding the `extraFields()` function, we allowed the URL request to return details about the individual `Loinc` items contained within each `LoincPanel`.  To use this functionality when making a request, you would add `&expand=panel` to the URL.
+In addition, by adding the `extraFields()` function, we allowed the URL request to return details about the individual `Loinc` items contained within each `LoincPanel`.  To use this functionality when making a request, you would add `expand=panel` to the URL.
 
 ## Example / demo
+
+www.example.com/api/vi/loinc
+
+	. . .
+	
+	<item>
+		<loinc_num>24313-9</loinc_num>
+		<loinc_name>Hepatitis 1996 panel - Serum</loinc_name>
+		<component>Hepatitis 1996 panel</component>
+		<common_test_rank>0</common_test_rank>
+		<common_order_rank>0</common_order_rank>
+		<panel_type>Panel</panel_type>
+	</item>
+
+	. . .
+	
+www.example.com/api/v1/loinc?expand=panel
+
+	. . . 
+	
+	<item>
+		<loinc_num>24313-9</loinc_num>
+		<loinc_name>Hepatitis 1996 panel - Serum</loinc_name>
+		<component>Hepatitis 1996 panel</component>
+		<common_test_rank>0</common_test_rank>
+		<common_order_rank>0</common_order_rank>
+		<panel_type>Panel</panel_type>
+		<panel>
+			<item>
+				<parent_id>10149</parent_id>
+				<parent_loinc>24313-9</parent_loinc>
+				<parent_name>Hepatitis 1996 Pnl Ser</parent_name>
+				<id>10150</id>
+				<sequence>1</sequence>
+				<loinc_num>22312-3</loinc_num>
+				<loinc_name>HAV Ab Ser-aCnc</loinc_name>
+				<loinc>
+					<loinc_num>22312-3</loinc_num>
+					<loinc_name>Hepatitis A virus Ab [Units/volume] in Serum</loinc_name>
+					<component>Hepatitis A virus Ab</component>
+					<common_test_rank>0</common_test_rank>
+					<common_order_rank>0</common_order_rank>
+					<panel_type/>
+				</loinc>
+			</item>
+			
+			. . . 
+			
+			<item>
+				<parent_id>10149</parent_id>
+				<parent_loinc>24313-9</parent_loinc>
+				<parent_name>Hepatitis 1996 Pnl Ser</parent_name>
+				<id>10154</id>
+				<sequence>5</sequence>
+				<loinc_num>22327-1</loinc_num>
+				<loinc_name>HCV Ab Ser-aCnc</loinc_name>
+				<loinc>
+					<loinc_num>22327-1</loinc_num>
+					<loinc_name>Hepatitis C virus Ab [Units/volume] in Serum</loinc_name>
+					<component>Hepatitis C virus Ab</component>
+					<common_test_rank>0</common_test_rank>
+					<common_order_rank>0</common_order_rank>
+					<panel_type/>
+				</loinc>
+			</item>
+		</panel>
+	</item>
+	
+	. . .
 
 [yii download]: http://www.yiiframework.com/download/ (Yii download page)

@@ -64,7 +64,7 @@ Not only did we make the URLs pretty, but we also added a rule that for the `loi
 
 ## Create a relational database structure
 
-If you don't already have a database set up, follow the directions to install XAMPP and plug the following code into your SQL editor.
+If you don't already have a database set up, follow the directions to [install XAMPP][install xampp] and plug the following code into your SQL editor.
 
 	DROP  TABLE IF EXISTS loinc;
 	CREATE TABLE loinc (
@@ -86,7 +86,7 @@ If you don't already have a database set up, follow the directions to install XA
 
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-We are going to make two databases - one for LOINC codes, and another for LOINC panels.  Since LOINC codes can be related to several LOINC panels, and LOINC panels can have only one parent LOINC code, we will need to define those relations later on.
+We are going to make two tables - one for LOINC codes, and another for LOINC panels.  Since LOINC codes can be related to several LOINC panels, and LOINC panels can have only one parent LOINC code, we will need to define those relations later on.
 
 ## Setup database config file
 
@@ -242,4 +242,5 @@ In addition, by adding the `extraFields()` function, we allowed the URL request 
 	<panel_type/>
 
 [yii download]: http://www.yiiframework.com/download/
+[install xampp]: https://www.apachefriends.org/download.html
 [yii gii guide]: http://www.yiiframework.com/doc-2.0/guide-start-gii.html#starting-gii

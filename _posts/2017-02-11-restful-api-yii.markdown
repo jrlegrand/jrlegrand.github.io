@@ -123,7 +123,7 @@ If you get lost, follow Yii's excellent [guide to working with Gii][yii gii guid
 
 ## Create the RESTful Controller
 
-Type the following into Notepad and save it as `\controllers\LoincController.php`.
+Type the following into your favorite text editor and save it as `\controllers\LoincController.php`.
 
 	namespace app\controllers;
 	

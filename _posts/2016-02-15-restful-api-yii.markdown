@@ -202,7 +202,7 @@ www.example.com/api/v1/loinc?expand=panel (showing details of the contents of ea
 	
 	. . .
 	
-http://www.monitorx.org/api/v1/loinc/22327-1 (specific Loinc ID)
+http://www.monitorx.org/api/v1/loinc/22327-1 (specific LOINC ID)
 
 	<loinc_num>22327-1</loinc_num>
 	<loinc_name>Hepatitis C virus Ab [Units/volume] in Serum</loinc_name>

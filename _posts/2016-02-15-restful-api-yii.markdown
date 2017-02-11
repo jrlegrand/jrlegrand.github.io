@@ -103,7 +103,7 @@ You will need to configure your database configuration file to point to the data
 	];
 
 
-## Use Gii to create the models
+## Use Gii to generate the models
 
 Yii comes with an incredible code generation tool called Gii which can create entire models out of code with a few clicks.  For our purposes, we will need to create models for `Loinc` and `LoincPanel`.
 
@@ -115,7 +115,7 @@ The tricky part here is locating Gii with the proper URL syntax since we modifie
 		'allowedIPs' => ['YOUR_IP_ADDRESS']
     ];
 
-Once you have launched the Gii module, click the Model Generator link on the first page.  Type "loinc" into the table name field, and hit tab.  Press the Preview button, and then once it appears, press the Generate button.  Voila!  Now you have generated a file called `\models\Loinc.php`.  Repeat for your table "loinc_panel" so that you now have two Models.
+Once you have launched the Gii module, click the Model Generator link on the first page.  Type "loinc" into the Table Name field, and hit tab.  Press the Preview button, and then once it appears, press the Generate button.  Voila!  Now you have generated a file called `\models\Loinc.php`.  Repeat for your table "loinc_panel" so that you now have two Models.
 
 ![Gii Model screen](http://coderx.io/img/gii.png)
 

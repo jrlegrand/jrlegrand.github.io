@@ -1,12 +1,12 @@
 ---
 layout: post
-title:  "Making a RESTFUL API with Yii 2.0"
+title:  "Making a RESTful API with Yii 2.0"
 date:   2016-02-24 10:23:43 -0600
 categories: yii
 ---
 Intro:
 
-RESTFUL APIs are a modern way to serve data from your database for your app to consume.  They expose your data via JSON or XML so you can separate your database queries in the backend from the action in the frontend.
+RESTful APIs are a modern way to serve data from your database for your app to consume.  They expose your data via JSON or XML so you can separate your database queries in the backend from the action in the frontend.
 
 Steps:
 

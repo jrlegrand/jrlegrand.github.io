@@ -133,7 +133,7 @@ In addition, by adding the `extraFields()` function, we allowed the URL request 
 
 ## Example
 
-www.example.com/api/v1/loinc
+www.example.com/api/v1/loinc (showing all LOINC codes)
 
 	. . .
 	
@@ -148,7 +148,7 @@ www.example.com/api/v1/loinc
 
 	. . .
 	
-www.example.com/api/v1/loinc?expand=panel
+www.example.com/api/v1/loinc?expand=panel (showing details of the contents of each panel)
 
 	. . . 
 	
@@ -201,5 +201,14 @@ www.example.com/api/v1/loinc?expand=panel
 	</item>
 	
 	. . .
+	
+http://www.monitorx.org/api/v1/loinc/22327-1 (specific Loinc ID)
+
+	<loinc_num>22327-1</loinc_num>
+	<loinc_name>Hepatitis C virus Ab [Units/volume] in Serum</loinc_name>
+	<component>Hepatitis C virus Ab</component>
+	<common_test_rank>0</common_test_rank>
+	<common_order_rank>0</common_order_rank>
+	<panel_type/>
 
 [yii download]: http://www.yiiframework.com/download/

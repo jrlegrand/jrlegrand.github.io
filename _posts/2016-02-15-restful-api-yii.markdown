@@ -14,7 +14,7 @@ Steps:
 
 Go to [http://www.yiiframework.com/download/][yii download].
 
-I recommend using the Composer method to install the basic application template.  Install Yii into an "/api/v1" subfolder of your app to keep it separate from the rest of your code.
+I recommend using the Composer method to install the basic application template.  Install Yii into an "\api\v1" subfolder of your app to keep it separate from the rest of your code.
 
 ## Customize .htaccess and web config to show pretty URLs
 
@@ -37,7 +37,7 @@ Ugly URLs look like `/index.php?r=post/view&id=100`
 Pretty URLs look like `/index.php/post/100`
 Prettier URLS look like `/post/100`
 
-By default, Yii shows ugly URLs.  We need to make them prettier by opening up `/config/web.php` and changing `enablePrettyUrl` to true.
+By default, Yii shows ugly URLs.  We need to make them prettier by opening up `\config\web.php` and changing `enablePrettyUrl` to true.
 
 	[
 	 'components' => [ 
@@ -90,7 +90,7 @@ We are going to make two databases - one for LOINC codes, and another for LOINC 
 
 ## Setup database config file
 
-You will need to configure your database configuration file to point to the database you created with the appropriate username and password for Yii to be able to make queries.  Open the file `/config/db.php` and fill in your database host URL, your database name, your username, and your password.
+You will need to configure your database configuration file to point to the database you created with the appropriate username and password for Yii to be able to make queries.  Open the file `\config\db.php` and fill in your database host URL, your database name, your username, and your password.
 
 	<?php
 
@@ -107,7 +107,7 @@ You will need to configure your database configuration file to point to the data
 
 Yii comes with an incredible code generation tool called Gii which can create entire models out of code with a few clicks.  For our purposes, we will need to create models for `Loinc` and `LoincPanel`.
 
-The tricky part here is locating Gii with the proper URL syntax since we modified the default URL syntax with our pretty URL rules.  If your rules are set up correctly, you should be able to navigate to `www.example.com/api/v1/gii` and launch the module.  By default, Yii blocks access to Gii for any connection other than localhost.  If you are trying to use Gii while your app is hosted, you will need to add an allowed IP address to your `/config/web.php` file.
+The tricky part here is locating Gii with the proper URL syntax since we modified the default URL syntax with our pretty URL rules.  If your rules are set up correctly, you should be able to navigate to `www.example.com/api/v1/gii` and launch the module.  By default, Yii blocks access to Gii for any connection other than localhost.  If you are trying to use Gii while your app is hosted, you will need to add an allowed IP address to your `\config\web.php` file.
 
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
@@ -115,7 +115,7 @@ The tricky part here is locating Gii with the proper URL syntax since we modifie
 		'allowedIPs' => ['YOUR_IP_ADDRESS']
     ];
 
-Once you have launched the Gii module, click the Model Generator link on the first page.  Type "loinc" into the table name field, and hit tab.  Press the Preview button, and then once it appears, press the Generate button.  Voila!  Now you have generated a file called `/models/Loinc.php`.  Repeat for your table "loinc_panel" so that you now have two Models.
+Once you have launched the Gii module, click the Model Generator link on the first page.  Type "loinc" into the table name field, and hit tab.  Press the Preview button, and then once it appears, press the Generate button.  Voila!  Now you have generated a file called `\models\Loinc.php`.  Repeat for your table "loinc_panel" so that you now have two Models.
 
 ![Gii Model screen](http://coderx.io/img/gii.png)
 
@@ -123,7 +123,7 @@ If you get lost, follow Yii's excellent [guide to working with Gii][yii gii guid
 
 ## Create the RESTful Controller
 
-Type the following into Notepad and save it as `/controllers/LoincController.php`.
+Type the following into Notepad and save it as `\controllers\LoincController.php`.
 
 	namespace app\controllers;
 	
@@ -134,7 +134,7 @@ Type the following into Notepad and save it as `/controllers/LoincController.php
 	    public $modelClass = 'app\models\Loinc';
 	}
 
-Do the same thing for your LOINC panel model (repeat the above, but replace `Loinc` with `LoincPanel`).	So you should now have added two files to the controllers directory: `LoincController.php` and `LoincPanelController.php`.
+Do the same thing for your LOINC panel model (repeat the above, but replace `Loinc` with `LoincPanel`).	So you should now have added two files to the controllers directory: `\controllers\LoincController.php` and `\controllers\LoincPanelController.php`.
 
 This tiny file (along with the RESTful URL rule we applied earlier) gives you basically all the functionality of a RESTful API with minimal code.
 
@@ -149,21 +149,21 @@ By default, Yii uses the `id` field as the primary key, but in this case, we nee
 
 Also, we need to define the relations between LOINC codes and LOINC panels.  We define a `hasMany` panel relationship with the `LoincPanel` model, and we link the two models based on a panel's `parent_loinc` being equal to its parent's `loinc_num`.
 
-	public function extraFields()
-	{
-		return ['panel'];
-	}
-	
 	public function getPanel()
 	{
 		return $this->hasMany(LoincPanel::className(), ['parent_loinc' => 'loinc_num']);
+	}
+	
+	public function extraFields()
+	{
+		return ['panel'];
 	}
 
 In addition, by adding the `extraFields()` function, we allowed the URL request to return details about the individual `Loinc` items contained within each `LoincPanel`.  To use this functionality when making a request, you would add `expand=panel` to the URL.
 
 ## Example
 
-www.example.com/api/v1/loinc (showing all LOINC codes)
+**www.example.com/api/v1/loinc** (showing all LOINC codes)
 
 	. . .
 	
@@ -178,7 +178,7 @@ www.example.com/api/v1/loinc (showing all LOINC codes)
 
 	. . .
 	
-www.example.com/api/v1/loinc?expand=panel (showing details of the contents of each panel)
+**www.example.com/api/v1/loinc?expand=panel** (showing details of the contents of each panel)
 
 	. . . 
 	
@@ -232,7 +232,7 @@ www.example.com/api/v1/loinc?expand=panel (showing details of the contents of ea
 	
 	. . .
 	
-http://www.monitorx.org/api/v1/loinc/22327-1 (specific LOINC ID)
+**http://www.monitorx.org/api/v1/loinc/22327-1** (specific LOINC ID)
 
 	<loinc_num>22327-1</loinc_num>
 	<loinc_name>Hepatitis C virus Ab [Units/volume] in Serum</loinc_name>

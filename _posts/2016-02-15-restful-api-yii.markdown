@@ -202,4 +202,4 @@ www.example.com/api/v1/loinc?expand=panel
 	
 	. . .
 
-[yii download]: http://www.yiiframework.com/download/ (Yii download page)
+[yii download]: http://www.yiiframework.com/download/

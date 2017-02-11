@@ -43,14 +43,19 @@ By default, Yii shows ugly URLs.  We need to make them prettier by opening up `/
 	 'components' => [ 
 	 	'urlManager' => [
 			 'enablePrettyUrl' => true,
+			 'enableStrictParsing' => true,
 			 'showScriptName' => false,
-			 'enableStrictParsing' => false,
 			 'rules' => [
 				'class' => 'yii\rest\UrlRule',
-				'controller' => [
-					'loinc'
-				],
-			 ],
+				'controller' =>
+					[
+						'loinc'
+					],
+				'pluralize' => false, // we don't expect 'loinc' to be plural
+				'tokens' => [
+					'{id}' => '<id:\\w+[-]\\w+>', // regex for allowing an ID such as 123-456
+				]
+			],
 		 ],
 	 ],
 	]
@@ -85,13 +90,32 @@ We are going to make two databases - one for LOINC codes, and another for LOINC 
 
 ## Setup database config file
 
-You will need to configure your database configuration file to point to the database you created with the appropriate username and password for Yii to be able to make queries.
+You will need to configure your database configuration file to point to the database you created with the appropriate username and password for Yii to be able to make queries.  Open the file `/config/db.php` and fill in your database host URL, your database name, your username, and your password.
+
+	<?php
+
+	return [
+	    'class' => 'yii\db\Connection',
+	    'dsn' => 'mysql:host=YOUR_DATABASE_HOST_URL;dbname=YOUR_DATABASE_NAME',
+	    'username' => 'YOUR_USERNAME',
+	    'password' => 'YOUR_PASSWORD',
+	    'charset' => 'utf8',
+	];
+
 
 ## Use Gii to make the models
 
 Yii comes with an incredible code generation tool called Gii which can create entire models out of code with a few clicks.  For our purposes, we will need to create models for `Loinc` and `LoincPanel`.
 
-The tricky part here is locating Gii with the proper URL syntax since we modified the default URL syntax with our "pretty" rules.
+The tricky part here is locating Gii with the proper URL syntax since we modified the default URL syntax with our pretty URL rules.  If your rules are set up correctly, you should be able to navigate to `www.example.com/api/v1/gii` and launch the module.  By default, Yii blocks access to Gii for any connection other than localhost.  If you are trying to use Gii while your app is hosted, you will need to add an allowed IP address to your `/config/web.php` file.
+
+    $config['bootstrap'][] = 'gii';
+    $config['modules']['gii'] = [
+        'class' => 'yii\gii\Module',
+		'allowedIPs' => ['YOUR_IP_ADDRESS']
+    ];
+
+Once you have launched the Gii module, 
 
 ## Create the RESTful Controller
 

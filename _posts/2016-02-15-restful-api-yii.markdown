@@ -12,7 +12,7 @@ Steps:
 
 ## Download and install Yii 2 into an api subdirectory
 
-Go to http://www.yiiframework.com/download/
+Go to [http://www.yiiframework.com/download/][yii download].
 
 I recommend using the Composer method to install the basic application template.  Install Yii into an "api" subfolder of your app to keep it separate from the rest of your code.
 
@@ -56,7 +56,7 @@ By default, Yii shows ugly URLs.  We need to make them prettier by opening up `/
 	 ],
 	]
 
-Not only did we make the URLs pretty, but we also added a rule that for the `loinc` and `loinc-panel` controllers, we should use a RESTFUL URL class.  I will go into how this is useful as we go on.
+Not only did we make the URLs pretty, but we also added a rule that for the `loinc` and `loinc-panel` controllers, we should use a RESTful URL class.  I will go into how this is useful as we go on.
 
 ## Create a relational database structure
 
@@ -101,9 +101,9 @@ Type the following into Notepad and save it as `/controllers/LoincController.php
 	    public $modelClass = 'app\models\Loinc';
 	}
 
-Do the same thing for your LOINC panel model (repeat the above, but replace `Loinc` with `LoincPanel`).	
+Do the same thing for your LOINC panel model (repeat the above, but replace `Loinc` with `LoincPanel`).	So you should now have added two files to the controllers directory: `LoincController.php` and `LoincPanelController.php`.
 
-This tiny file (along with the RESTFUL URL rule we applied earlier) gives you basically all the functionality of a RESTFUL API with minimal code.
+This tiny file (along with the RESTful URL rule we applied earlier) gives you basically all the functionality of a RESTful API with minimal code.
 
 * Customize the controller to change default actions
 ** (i.e. pagination / sorting)
@@ -129,10 +129,8 @@ Also, we need to define the relations between LOINC codes and LOINC panels.  We 
 		return $this->hasMany(LoincPanel::className(), ['parent_loinc' => 'loinc_num']);
 	}
 
-
-
-* Define relations
-* Show expanded fields
+In addition, by adding the `extraFields()` function, we allowed the URL request to return details about the individual `Loinc` items contained within each `LoincPanel`.  To use this functionality when making a request, you would add `&expand=panel` to the URL.
 
 ## Example / demo
-* Show how to write the URL to include expanded fields
+
+[yii download]: http://www.yiiframework.com/download/ (Yii download page)

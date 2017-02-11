@@ -48,15 +48,14 @@ By default, Yii shows ugly URLs.  We need to make them prettier by opening up `/
 			 'rules' => [
 				'class' => 'yii\rest\UrlRule',
 				'controller' => [
-					'loinc',
-					'loinc-panel',
+					'loinc'
 				],
 			 ],
 		 ],
 	 ],
 	]
 
-Not only did we make the URLs pretty, but we also added a rule that for the `loinc` and `loinc-panel` controllers, we should use a RESTful URL class.  I will go into how this is useful as we go on.
+Not only did we make the URLs pretty, but we also added a rule that for the `loinc` controller, we should use a RESTful URL class.  I will go into how this is useful as we go on.
 
 ## Create a relational database structure
 
@@ -86,9 +85,15 @@ We are going to make two databases - one for LOINC codes, and another for LOINC 
 
 ## Setup database config file
 
+You will need to configure your database configuration file to point to the database you created with the appropriate username and password for Yii to be able to make queries.
+
 ## Use Gii to make the models
 
-## Create the RESTFUL Controller
+Yii comes with an incredible code generation tool called Gii which can create entire models out of code with a few clicks.  For our purposes, we will need to create models for `Loinc` and `LoincPanel`.
+
+The tricky part here is locating Gii with the proper URL syntax since we modified the default URL syntax with our "pretty" rules.
+
+## Create the RESTful Controller
 
 Type the following into Notepad and save it as `/controllers/LoincController.php`.
 

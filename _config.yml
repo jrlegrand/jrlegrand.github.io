@@ -9,8 +9,7 @@
 title: LeGrand.io Blog
 email: jrlegrand@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
-  This blog is an outlet for sharing things I learn along the way
-  as I try to become a better developer and pharmacist informaticist.
+  This blog is meant to be a companion piece to my exploration of application development as it relates to pharmacy and health IT.
   <br>
   - Joey LeGrand
 baseurl: "" # the subpath of your site, e.g. /blog

@@ -31,6 +31,8 @@ When it all comes together, this is what it looks like.
 
 ![Fill View](https://raw.githubusercontent.com/jrlegrand/jrlegrand.github.io/master/img/fill-view/fillview.jpg)
 
+I'll be the first to admit that I am playing with idealistic and fake medication history data, and there will undoubtedly be informatics challenges if/whenever I get my hands on some actual de-identified patient PDMP data (i.e. free text meds / difficulty calculating days' supply / etc).  And I appreciate that I'm going about this a bit backwards by working on a visualization without having actual data.  I just wanted to see if I could create an intuitive user interface for dealing with this type of task with the eventual goal of integrating.  I can also see this being beneficial for visualizing patient compliance with non-opioid medications, which is why I named it something general like "Fill View" as opposed to something "Narc"-y.
+
 How quickly can you tell whether or not this patient is filling controlled substances early with the PDF versus the visualization?
 
 Link to active prototype: [Fill View](https://legrand.io/fill-view/)

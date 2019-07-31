@@ -2,7 +2,7 @@
 layout: post
 title:  "Visualizing Prescription Drug Monitoring Program (PDMP) Data"
 date:   2019-07-31 10:12:00 -0600
-categories: yii
+categories: informatics
 ---
 ## Visualizing Prescription Drug Monitoring Program (PDMP) Data
 

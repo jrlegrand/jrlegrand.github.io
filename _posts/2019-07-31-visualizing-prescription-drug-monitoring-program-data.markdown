@@ -14,7 +14,7 @@ I always thought there had to be a better way, and wanted to mock-up some potent
 
 The main focus of my prototype is to display the data in a "timeline heatmap" format where it is easy to see where prescriptions overlap in terms of fill date and duration.  Granted, this could be misleading if the dosage changes or for several other reasons; however, it immediately calls attention to these periods of time.
 
-![Timeline](https://raw.githubusercontent.com/jrlegrand/jrlegrand.github.io/master/img/fill-view/timeline.jpg)
+![Heatmap](https://raw.githubusercontent.com/jrlegrand/jrlegrand.github.io/master/img/fill-view/heatmap.jpg)
 
 I created options to change:
 * Color - overlap or MME/day

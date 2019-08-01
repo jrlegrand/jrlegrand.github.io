@@ -6,7 +6,7 @@ categories: informatics
 ---
 As a former retail pharmacist of 5+ years, I always felt like the prescription drug monitoring program (PDMP) user interface was horrible.  The results of a search (at least in the state where I worked) were returned in a PDF document which didn't allow for any interaction (sorting / filtering / decision support / etc), prescriber and pharmacy information was hidden away at the bottom of the PDF and only referred to within the data as a strange code name, and trying to figure out whether a patient had red flags for prescription diversion took way more math and focus than it needed to.
 
-This is an example of what the PDMP currently looks like in my state for the same patient (all of this is fake data, FYI).
+This is an example of what the PDMP currently looks like in my state for a patient query (all of this is fake data, FYI).
 
 ![PDMP](https://raw.githubusercontent.com/jrlegrand/jrlegrand.github.io/master/img/fill-view/pdmp.jpg)
 

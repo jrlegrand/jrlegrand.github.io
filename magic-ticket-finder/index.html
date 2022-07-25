@@ -1,0 +1,235 @@
+<html>
+	<head>
+		<!-- Google Tag Manager -->
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+		new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+		j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+		'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+		})(window,document,'script','dataLayer','GTM-WCL7HZP');</script>
+		<!-- End Google Tag Manager -->
+		<title>Magic Ticket Finder</title>
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+		<link rel="icon" type="image/png" href="https://s15.postimg.cc/lund3zbh7/magic.png">
+		<script>
+		$( document ).ready(function() {
+			var query = getUrlParam('q','');
+			
+			if (query !== '') {
+				var input = $("#magic-input").val();
+				if (input == '') {
+					query = query.replace(/\+/, ' ');
+					$("#magic-input").val(query);
+					var id = query;
+					
+					openTicket(id, false);
+				}
+			}
+			console.log('query', query);
+		
+			$("#magic-input").focus();
+			updateHistory();
+			
+			$("#magic-input").click(function(e) { this.select(); });
+			
+			$("#magic-form").submit(function(e) {
+				e.preventDefault();
+				var id = $("#magic-input").val();
+				
+				openTicket(id, true);
+			});
+			
+			function openTicket(id, newWindow) {				
+				console.log(newWindow);
+
+				id = id.replace(/\s/, '')
+
+				if (!id.match(/CABOODLE/ig)) {
+					id = id.toUpperCase();
+				}				
+
+				const destinations = [
+					{ regex: /^SD\d+$/ig, url: 'https://pegasus.vumc.org/ViewCommunication.aspx?id=' + id },
+					{ regex: /^R\d+$/ig, url: 'https://pegasus.vumc.org/request/?id=' + id },
+					{ regex: /^T\d+$/ig, url: 'https://pegasus.vumc.org/request/task/?id=' + id },
+					{ regex: /^C\d+$/ig, url: 'https://pegasus.vumc.org/ViewChange.aspx?id=' + id },
+					{ regex: /^IM\d+$/ig, url: 'https://pegasus.vumc.org/ViewIncident.aspx?ID=' + id },
+					{ regex: /^KM\d+$/ig, url: 'https://pegasus.vumc.org/ViewKnowledge.aspx?id=' + id.match(/\d+/) },
+					{ regex: /^CR\d+$/ig, url: 'https://sharepoint.app.vumc.org/ea/healthit/cti/estar/environments/Lists/ChangeReq/DispForm.aspx?ID=' + id.match(/\d+/) },
+					{ regex: /^SCR\d+$/ig, url: 'https://sharepoint.app.vumc.org/ea/healthit/cti/estar/environments/Lists/Security%20CRs/DispForm.aspx?ID=' + id.match(/\d+/) },
+					{ regex: /^(?:ES18)-\d+$/ig, url: 'https://jira.app.vumc.org/browse/' + id.match(/ES18-\d+/) },
+					{ regex: /^(?:C19)-\d+$/ig, url: 'https://jira.app.vumc.org/browse/' + id.match(/C19-\d+/) },
+					{ regex: /^(?:CALM|OCM|ORD|CDSWG|HPU|HP|CIM|WIL|CDOC|CHART|RPLP|ASE|MEDREC|NSE|ETR)-*\d+$/ig, url: 'https://jira.app.vumc.org/browse/' + id.replace(/-/, '').match(/\D+/) + '-' + id.match(/\d+/) },
+					{ regex: /^SLG\d+$/ig, url: 'https://sherlock.epic.com/default.aspx?view=slg/home#id=' + id.match(/\d+/) },
+					{ regex: /^(?:NOVA|N)\d+$/ig, url: 'https://nova.epic.com/Select.aspx?CstID=1008&RnID=' + id.match(/\d+/) },
+					{ regex: /^Q-*\d+$/ig, url: 'https://sherlock.epic.com/default.aspx?view=zqn/search#id=' + id.match(/\d+/) },
+					{ regex: /^NOVA$/ig, url: 'https://nova.epic.com' },
+					{ regex: /^SLG$/ig, url: 'https://sherlock.epic.com' },
+					{ regex: /^R$/ig, url: 'https://pegasus.vumc.org/dash/?v=15' },
+					{ regex: /^T$/ig, url: 'https://pegasus.vumc.org/dash/?v=11' },
+					{ regex: /^C$/ig, url: 'https://pegasus.vumc.org/dash/?v=3' },
+					{ regex: /^IM$/ig, url: 'https://pegasus.vumc.org/dash/?v=2' }, 
+					{ regex: /^CHARTY$/ig, url: 'https://legrand.io/magic-ticket-finder/img/chartyd.png' },
+					{ regex: /^CLARITY\w+$/ig, url: 'https://datahandbook.epic.com/ClarityDictionary/Details?tblName=' + id.replace(/CLARITY/, '') },
+					{ regex: /^CABOODLE\w+$/ig, url: 'https://estarcdw.app.vumc.org/CaboodlePRD/tables/' + id.replace(/CABOODLE/ig, '') },
+					{ regex: /^(C|CHANGE|CAHNGE)$/ig, url: 'https://pegasus.vumc.org/change/create' },
+					{ regex: /^(?:CALM|OCM|ORD|CDSWG|HPU|HP|CIM|WIL|CDOC|CHART|RPLP|ASE|MEDREC|NSE|ETR|ES18|C19)$/ig, url: 'https://jira.app.vumc.org/browse/' + id },
+				];
+				
+				destinations.map(function(d) {
+					if (d.regex.exec(id)) {
+						var cookie = readCookie('url_history');
+						var urlHistory = (cookie ? cookie.split(',') : []);
+						urlHistory.push(d.url);
+						createCookie('url_history', urlHistory, 3);
+						updateHistory();
+						if (newWindow) {
+							window.open(d.url, '_blank');
+						} else {
+							window.location.assign(d.url);
+						}
+					}
+				});			
+			}
+			
+			function updateHistory() {
+				var cookie = readCookie('url_history');
+				var urlHistory = (cookie ? cookie.split(',') : []);
+				var list = $('<ul/>');
+				for (var i = urlHistory.length - 1; i >= 0; i--) {
+					list.append('<li><a href="' + urlHistory[i] + '" target="_blank" class="magic-history-link">' + urlHistory[i] + '</a></li>');
+				}
+				$('#url-history').html(list);
+			}
+
+			function createCookie(name, value, days) {
+				var expires;
+
+				if (days) {
+					var date = new Date();
+					date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+					expires = "; expires=" + date.toGMTString();
+				} else {
+					expires = "";
+				}
+				document.cookie = encodeURIComponent(name) + "=" + encodeURIComponent(value) + expires + "; path=/";
+			}
+
+			function readCookie(name) {
+				var nameEQ = encodeURIComponent(name) + "=";
+				var ca = document.cookie.split(';');
+				for (var i = 0; i < ca.length; i++) {
+					var c = ca[i];
+					while (c.charAt(0) === ' ')
+						c = c.substring(1, c.length);
+					if (c.indexOf(nameEQ) === 0)
+						return decodeURIComponent(c.substring(nameEQ.length, c.length));
+				}
+				return null;
+			}
+
+			function eraseCookie(name) {
+				createCookie(name, "", -1);
+			}
+			
+			function getUrlVars() {
+				var vars = {};
+				var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+					vars[key] = value;
+				});
+				return vars;
+			}
+			
+			function getUrlParam(parameter, defaultvalue){
+				var urlparameter = defaultvalue;
+				if(window.location.href.indexOf(parameter) > -1){
+					urlparameter = getUrlVars()[parameter];
+					}
+				return decodeURIComponent(urlparameter);
+			}			
+		});
+		</script>
+		<!-- Global site tag (gtag.js) - Google Analytics -->
+		<script async src="https://www.googletagmanager.com/gtag/js?id=UA-123248865-1"></script>
+		<script>
+			window.dataLayer = window.dataLayer || [];
+			function gtag(){dataLayer.push(arguments);}
+			gtag('js', new Date());
+
+			gtag('config', 'UA-123248865-1');
+		</script>
+		<style>
+			body { background: #eee; padding-top: 100px; padding-bottom: 200px; }
+			#magic-form { margin-bottom: 0; }
+			#magic-input { text-transform: uppercase; }
+			#url-history ul { padding: 0; margin: 0; }
+			#url-history ul li { list-style-type: none; }
+		</style>
+	</head>
+	<body>
+		<!-- Google Tag Manager (noscript) -->
+		<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WCL7HZP"
+		height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+		<!-- End Google Tag Manager (noscript) -->
+		<div class="container">
+			<div class="row">
+				<div class="col-sm-12 col-md-8">
+					<div class="col-sm-12">
+					<h2>Magic Ticket Finder <i class="fas fa-magic"></i></h2>
+					<p>This form saves you time searching for tickets if you already know the ID.</p>
+					<p><a href="https://confluence.mc.vanderbilt.edu/pages/viewpage.action?pageId=155912758" target="_blank"><i class="fab fa-chrome"></i> Magic Ticket Finder "Chrome Extension" and Search Engine</a></p>
+					<ul>
+						<li>Pegasus: <strong>SD</strong>123, <strong>R</strong>123, <strong>T</strong>123, <strong>C</strong>123, <strong>IM</strong>123, <strong>KM</strong>123</li>
+						<li>Jira: <strong>C19</strong>-123, <strong>CALM</strong>-123, <strong>CHART</strong>-123, <strong>OCM</strong>-123, <strong>ORD</strong>-123, <strong>CDSWG</strong>-123, <strong>HP</strong>-123, <strong>HPU</strong>-123, <strong>CIM</strong>-123, <strong>RPLP</strong>-123, <strong>WIL</strong>-123, <strong>CDOC</strong>-123, <strong>ES18</strong>-123, <strong>ASE</strong>-123, <strong>MEDREC</strong>-123, <strong>NSE</strong>-123, <strong>ETR</strong>-123</li>
+						<li>SharePoint: <strong>CR</strong>123, <strong>SCR</strong>123</li>
+						<li>Epic: <strong>SLG</strong>123, <strong>NOVA</strong>123, <strong>Q</strong>-123, <strong>CLARITY</strong> ABC, <strong>CABOODLE</strong> ABC</li>
+					</ul>
+					<p>Don't see your ticket?  <a href="https://forms.gle/2qEcDomZgAizVMse6" target="_blank">Submit a ticket</a> to get your ticket added!</p>
+
+					<p>
+						<i>Hint: You can type OCM-123, OCM 123, or OCM123 - they all work!</i>
+					</p>
+					</div>
+
+					<form class="form-inline" id="magic-form">
+						<div class="form-group mx-sm-3 mb-2">
+							<input class="form-control form-control-lg" type="text" placeholder="" id="magic-input" />
+						</div>
+						<button type="submit" class="btn btn-lg btn-success mb-2" id = "magic-button">GO</button>
+					</form>
+					
+					<div class="col-sm-12">
+						<a class="btn btn-link" data-toggle="collapse" href="#url-history-collapse" role="button" aria-expanded="false" aria-controls="url-history-collapse">
+							<strong><i class="fas fa-history"></i> History</strong>
+						</a>
+					</div>
+					<div class="col-sm-12 collapse" id="url-history-collapse">
+						<div class="card card-body" id="url-history">
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-sm-12 col-md-4">
+					<div style="margin-top: 15px; max-width: 555px; background-color: #f5f5f5; padding: 15px;">
+						<p>
+							<strong>
+								<span class="badge badge-primary">NEW</span> Magic Ticket Finder Chrome Search Engine
+							</strong>
+						</p>
+						<p>
+						Search for any ticket directly from Chrome by typing <code>mtf [ticket number]</code> into the search bar.<br/>
+						</p>
+						<p>
+							<a href="https://confluence.mc.vanderbilt.edu/display/~legranjr/Magic+Ticket+Finder+Chrome+Search+Engine" target="_blank">Find out how <i class="far fa-arrow-alt-circle-right"></i><br/><br/>
+								<img src="img/Magic Ticket Finder Chrome Search.gif" style="width: 100%;"></img>
+							</a>
+						</p>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</body>
+</html>

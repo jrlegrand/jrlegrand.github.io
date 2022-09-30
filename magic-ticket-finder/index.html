@@ -74,8 +74,8 @@
 					{ regex: /^CHARTY$/ig, url: 'https://legrand.io/magic-ticket-finder/img/chartyd.png' },
 					{ regex: /^CLARITY\w+$/ig, url: 'https://datahandbook.epic.com/ClarityDictionary/Details?tblName=' + id.replace(/^CLARITY/, '') },
 					{ regex: /^CABOODLE\w+$/ig, url: 'https://estarcdw.app.vumc.org/CaboodlePRD/tables/' + id.replace(/^CABOODLE/ig, '') },
-					{ regex: /^GALAXY.+$/ig, url: 'https://galaxy.epic.com/?#Search/version=0&versionOption=2&searchWord=' + id.replace(/^GALAXY/, '') },
-					{ regex: /^LPG.+$/ig, url: 'https://datahandbook.epic.com/Search/Index?type=2&SearchWord=' + id.replace(/^LPG/, '') },
+					{ regex: /^GALAXY.+$/ig, url: 'https://galaxy.epic.com/?#Search/version=0&versionOption=2&searchWord=' + id.replace(/^GALAXY/, '').replace(/\+/, ' ') },
+					{ regex: /^LPG.+$/ig, url: 'https://datahandbook.epic.com/Search/Index?type=2&SearchWord=' + id.replace(/^LPG/, '').replace(/\+/, ' ') },
 					{ regex: /^(C|CHANGE|CAHNGE)$/ig, url: 'https://pegasus.vumc.org/change/create' },
 					{ regex: /^(?:CALM|OCM|ORD|CDSWG|HPU|HP|CIM|WIL|CDOC|CHART|RPLP|ASE|MEDREC|NSE|ETR|ES18|C19)$/ig, url: 'https://jira.app.vumc.org/browse/' + id },
 				];

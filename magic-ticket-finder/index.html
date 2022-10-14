@@ -77,6 +77,7 @@
 					{ regex: /^GALAXY.+$/ig, url: 'https://galaxy.epic.com/?#Search/version=0&versionOption=2&searchWord=' + id.replace(/^GALAXY/, '').replace(/\+/g, ' ') },
 					{ regex: /^LPG.+$/ig, url: 'https://datahandbook.epic.com/Search/Index?type=2&SearchWord=' + id.replace(/^LPG/, '').replace(/\+/g, ' ') },
 					{ regex: /^(C|CHANGE|CAHNGE)$/ig, url: 'https://pegasus.vumc.org/change/create' },
+					{ regex: /^(SEP)$/ig, url: 'https://pegasus.vumc.org/change/calendar?term=CIID=132904||TemplateId=1426&view=month' },
 					{ regex: /^(?:CALM|OCM|ORD|CDSWG|HPU|HP|CIM|WIL|CDOC|CHART|RPLP|ASE|MEDREC|NSE|ETR|ES18|C19)$/ig, url: 'https://jira.app.vumc.org/browse/' + id },
 				];
 				

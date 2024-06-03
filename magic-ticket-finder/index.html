@@ -61,7 +61,7 @@
 					{ regex: /^SCR\d+$/ig, url: 'https://sharepoint.app.vumc.org/ea/healthit/cti/estar/environments/Lists/Security%20CRs/DispForm.aspx?ID=' + id.match(/\d+/) },
 					{ regex: /^(?:ES18)-\d+$/ig, url: 'https://jira.app.vumc.org/browse/' + id.match(/ES18-\d+/) },
 					{ regex: /^(?:C19)-\d+$/ig, url: 'https://jira.app.vumc.org/browse/' + id.match(/C19-\d+/) },
-					{ regex: /^(?:CALM|OCM|ORD|CDSWG|HPU|HP|CIM|WIL|CDOC|CHART|RPLP|ASE|MEDREC|NSE|ETR|LRMG)-*\d+$/ig, url: 'https://jira.app.vumc.org/browse/' + id.replace(/-/, '').match(/\D+/) + '-' + id.match(/\d+/) },
+					{ regex: /^(?:CALM|OCM|ORD|CDSWG|HPU|HP|CIM|WIL|CDOC|CHART|RPLP|ASE|MEDREC|NSE|ETR|LRMG|AGILE)-*\d+$/ig, url: 'https://jira.app.vumc.org/browse/' + id.replace(/-/, '').match(/\D+/) + '-' + id.match(/\d+/) },
 					{ regex: /^SLG\d+$/ig, url: 'https://sherlock.epic.com/default.aspx?view=slg/home#id=' + id.match(/\d+/) },
 					{ regex: /^(?:NOVA|N)\d+$/ig, url: 'https://nova.epic.com/Select.aspx?CstID=1008&RnID=' + id.match(/\d+/) },
 					{ regex: /^Q-*\d+$/ig, url: 'https://sherlock.epic.com/default.aspx?view=zqn/search#id=' + id.match(/\d+/) },
@@ -79,7 +79,7 @@
 					{ regex: /^LPG.+$/ig, url: 'https://datahandbook.epic.com/Search/Index?type=2&SearchWord=' + id.replace(/^LPG/, '').replace(/\+/g, ' ') },
 					{ regex: /^(C|CHANGE|CAHNGE)$/ig, url: 'https://pegasus.vumc.org/change/create' },
 					{ regex: /^(SEP)$/ig, url: 'https://pegasus.vumc.org/change/calendar?term=CIID=132904||TemplateId=1426&view=month' },
-					{ regex: /^(?:CALM|OCM|ORD|CDSWG|HPU|HP|CIM|WIL|CDOC|CHART|RPLP|ASE|MEDREC|NSE|ETR|ES18|C19|LRMG)$/ig, url: 'https://jira.app.vumc.org/browse/' + id },
+					{ regex: /^(?:CALM|OCM|ORD|CDSWG|HPU|HP|CIM|WIL|CDOC|CHART|RPLP|ASE|MEDREC|NSE|ETR|ES18|C19|LRMG|AGILE)$/ig, url: 'https://jira.app.vumc.org/browse/' + id },
 				];
 				
 				destinations.map(function(d) {

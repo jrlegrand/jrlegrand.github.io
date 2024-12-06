@@ -82,6 +82,7 @@
 					{ regex: /^(SEP)$/ig, url: 'https://pegasus.vumc.org/change/calendar?term=CIID=132904||TemplateId=1426&view=month' },
 					{ regex: /^(?:CALM|OCM|ORD|CDSWG|HPU|HP|CIM|WIL|CDOC|CHART|RPLP|ASE|MEDREC|NSE|ETR|ES18|C19|LRMG|AGILE)$/ig, url: 'https://jira.app.vumc.org/browse/' + id },
 					{ regex: /^PROJECT.+$/ig, url: 'https://vumc365-my.sharepoint.com/personal/joseph_legrand_vumc_org/Lists/Projects/AllItems.aspx?FilterField1=LinkTitle&FilterValue1=' + id.replace(/^PROJECT/, '').replace(/\+/g, ' ') + '&FilterType1=Computed&env=WebViewList&npsAction=createList' },
+					{ regex: /^(PROJECT|PROJECTS)$/ig, url: 'https://vumc365-my.sharepoint.com/personal/joseph_legrand_vumc_org/Lists/Projects/AllItems.aspx?env=WebViewList&npsAction=createList' },
 				];
 				
 				destinations.map(function(d) {

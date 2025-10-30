@@ -83,7 +83,7 @@
 					{ regex: /^(?:CALM|OCM|ORD|CDSWG|HPU|HP|CIM|WIL|CDOC|CHART|RPLP|ASE|MEDREC|NSE|ETR|ES18|C19|LRMG|AGILE)$/ig, url: 'https://vumc.atlassian.net/browse/' + id },
 					{ regex: /^PROJECT.+$/ig, url: 'https://vumc365-my.sharepoint.com/personal/joseph_legrand_vumc_org/Lists/Projects/AllItems.aspx?FilterField1=LinkTitle&FilterValue1=' + id.replace(/^PROJECT/, '').replace(/\+/g, ' ') + '&FilterType1=Computed&env=WebViewList&npsAction=createList' },
 					{ regex: /^(PROJECT|PROJECTS)$/ig, url: 'https://vumc365-my.sharepoint.com/personal/joseph_legrand_vumc_org/Lists/Projects/AllItems.aspx?env=WebViewList&npsAction=createList' },
-					{ regex: /^HMA\d+$/ig, url: 'https://support.hmahelp.com/a/tickets/' + id },
+					{ regex: /^(?:HMA|REQ|CC)\d+$/ig, url: 'https://support.hmahelp.com/a/tickets/' + id },
 				];
 				
 				destinations.map(function(d) {
